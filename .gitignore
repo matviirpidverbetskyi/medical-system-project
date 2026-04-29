@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local configuration file (for secret keys and DB credentials)
+.env
+
+# Database
+db.sqlite3
+db.sqlite3-journal
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# IDE files
+.idea/
+.vscode/
+
+# Static and Media (photos of doctors)
+static/
+media/
