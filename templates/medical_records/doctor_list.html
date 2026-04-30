@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f7f6; }
+        .card { background: white; padding: 20px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; }
+        .btn { display: inline-block; padding: 10px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <a href="{% url 'doctor_add' %}" class="btn">+ Додати нового лікаря</a>
+    <hr>
+
+    {% for doctor in doctors %}
+        <div class="card">
+            <h3>{{ doctor.full_name }}</h3>
+            <p><strong>Спеціалізація:</strong> {{ doctor.specialization.name }}</p>
+            <p><strong>Стаж:</strong> {{ doctor.experience_years }} років</p>
+            <a href="{% url 'doctor_detail' doctor.id %}">Детальніше</a> | 
+            <a href="{% url 'doctor_delete' doctor.id %}" style="color: red;">Видалити</a>
+        </div>
+    {% empty %}
+        <p>Лікарів поки не додано.</p>
+    {% endfor %}
+</body>
+</html>
