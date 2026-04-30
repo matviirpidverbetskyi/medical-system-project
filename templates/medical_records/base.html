@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Медична система{% endblock %}</title>
+    <style>
+        nav { background: #2c3e50; padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; }
+        .user-section { display: flex; align-items: center; gap: 10px; }
+        button.logout-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between;">
+    <div>
+        <a href="{% url 'doctor_list' %}" style="margin-right: 15px;">Головна</a>
+        </div>
+
+    <div>
+        {% if user.is_authenticated %}
+            <span>Ви увійшли як: <strong>{{ user.username }}</strong></span>
+            
+            <form action="{% url 'logout' %}" method="post" style="display: inline; margin-left: 10px;">
+                {% csrf_token %}
+                <button type="submit">Вийти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" style="margin-right: 10px;">Увійти</a>
+            <a href="{% url 'register' %}">Реєстрація</a>
+        {% endif %}
+    </div>
+</nav>
+<nav>
+    <div class="menu">
+        <a href="{% url 'doctor_list' %}">Лікарі</a>
+        <a href="{% url 'service_list' %}">Послуги</a>
+    </div>
+
+    <div class="user-section">
+        {% if user.is_authenticated %}
+            <span>Привіт, <strong>{{ user.username }}</strong>!</span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Вийти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a>
+            <a href="{% url 'register' %}">Реєстрація</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

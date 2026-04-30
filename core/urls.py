@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('medical_records.urls')), # Додаємо наш додаток
+    path('users/', include('users.urls')), # Додаємо маршрути користувачів
+    path('', include('medical_records.urls')),
 ]
